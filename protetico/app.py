@@ -2,7 +2,7 @@ import dash
 from dash import dash_table
 import plotly.express as px
 import pandas as pd 
-from dash import html, dcc
+from dash import html, dcc, Input, Output
 
 # Dados dos serviços com chaves atualizadas
 import pandas as pd
@@ -47,7 +47,7 @@ df = pd.DataFrame(ordenado)
 
 # start app
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, external_stylesheets=['https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'])
 
 # graff
 
@@ -57,7 +57,14 @@ grafico = px.bar(df, x='Servico', y='Preco', title='Preco dos Servicos')
 
 app.layout = html.Div([
     html.H1(children="Serviços Labor Ice - Dentista"),
-    dcc.Graph(figure=grafico),
+     dcc.Input(
+        id='search-bar',
+        type='text',
+        value='',
+        placeholder='Pesquisar serviços...'
+    ),
+    html.Button('Pesquisar', id='search-button', n_clicks=0),
+
     dash_table.DataTable(
         id='tabela-servicos',
         columns=[{'name': col, 'id': col} for col in df.columns],
@@ -67,8 +74,22 @@ app.layout = html.Div([
         page_action='native',
         page_current=0,
         page_size=10
-    )
+    ),
+
+    dcc.Graph(figure=grafico)
+
 ])
+
+@app.callback(
+    Output('tabela-servicos', 'data'),
+    Input('search-bar', 'value')
+)
+def update_table(search_value):
+    if search_value:
+        filtered_df = df[df['Servico'].str.contains(search_value, case=False, na=False)]
+    else:
+        filtered_df = df
+    return filtered_df.to_dict('records')
 
 # ServerExecut
 

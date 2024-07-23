@@ -1,0 +1,34 @@
+/* assets/style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #464646;
+}
+
+h1 {
+    color: #d6d3d3;
+    text-align: center;
+}
+
+div {
+    margin: 20px;
+}
+
+.custom-header {
+    text-align: center;
+    color: blue;
+    font-size: 2em;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+    border: 1px solid #b5b8e9;
+    padding: 8px;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #ffffff;
+}

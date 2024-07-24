@@ -32,3 +32,28 @@ div {
 .custom-table tr:nth-child(even) {
     background-color: #ffffff;
 }
+
+.contacts {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.contacts p {
+    font-size: 16px;
+}
+
+.contacts a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.contacts a:hover {
+    text-decoration: underline;
+}
+
+
+input, button {
+    margin-top: 10px;
+}

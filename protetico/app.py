@@ -75,7 +75,17 @@ app.layout = html.Div([
         page_current=0,
         page_size=10
     ),
-
+    html.H2(children="Contatos"),
+    html.Div([
+        html.P([
+            html.Span("WhatsApp: "),
+            html.A("WPP Business", href="https://wa.me/556191665018", target="_blank")
+        ]),
+        html.P([
+            html.Span("Instagram: "),
+            html.A("@labor_ice.grillz", href="https://www.instagram.com/labor_ice.grillz/", target="_blank")
+        ]),
+    ], className='contacts'),
     dcc.Graph(figure=grafico)
 
 ])

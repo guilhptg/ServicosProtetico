@@ -51,7 +51,11 @@ app = dash.Dash(__name__, external_stylesheets=['https://stackpath.bootstrapcdn.
 
 # graff
 
-grafico = px.bar(df, x='Servico', y='Preco', title='Preco dos Servicos')
+grafico = px.bar_polar(df, r='Servico', theta='Preco', height=600,
+                       color='Preco', template='plotly_dark')
+
+grafico2 = px.bar_polar(df, r='Preco', theta='Servico', height=600,
+                        color='Preco', template='plotly_dark')
 
 # layout
 
@@ -75,18 +79,18 @@ app.layout = html.Div([
         page_current=0,
         page_size=10
     ),
+    dcc.Graph(figure=grafico2),
     html.H2(children="Contatos"),
     html.Div([
         html.P([
             html.Span("WhatsApp: "),
-            html.A("WPP Business", href="https://wa.me/556191665018", target="_blank")
+            html.A("Labor ICE", href="https://wa.me/556191665018", target="_blank")
         ]),
         html.P([
             html.Span("Instagram: "),
             html.A("@labor_ice.grillz", href="https://www.instagram.com/labor_ice.grillz/", target="_blank")
         ]),
     ], className='contacts'),
-    dcc.Graph(figure=grafico)
 
 ])
 
@@ -100,7 +104,7 @@ def update_table(search_value):
     else:
         filtered_df = df
     return filtered_df.to_dict('records')
-
+    
 # ServerExecut
 
 if __name__ == '__main__':
